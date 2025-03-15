@@ -9,7 +9,7 @@ export default function Search({ placeholder }: { placeholder: string }) {
 
   const handleSearch = useDebouncedCallback((term: string) => {
     setQuery(term, { shallow: false });
-    setPage('1');
+    setPage('1', { shallow: true });
     if (!term) setQuery(null);
   }, 300);
 
