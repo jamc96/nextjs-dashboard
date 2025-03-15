@@ -5,15 +5,19 @@ import clsx from 'clsx';
 import Link from 'next/link';
 import { generatePagination } from '@/app/lib/utils';
 import { usePathname, useSearchParams } from 'next/navigation';
+import { parseAsInteger, useQueryState } from 'nuqs';
 
 export default function Pagination({ totalPages }: { totalPages: number }) {
   // NOTE: Uncomment this code in Chapter 11
   const pathName = usePathname();
   const searchParams = useSearchParams();
-  const currentPage = Number(searchParams.get('page')) || 1;
+  // improvement: setting the pagingation state
+  const [page, _] = useQueryState('page', parseAsInteger.withDefault(1));
+  const currentPage = page;
   const allPages = generatePagination(currentPage, totalPages);
 
   const createPageURL = (pageNumber: number | string) => {
+    console.log('pageNumber', pageNumber);
     const params = new URLSearchParams(searchParams);
     params.set('page', pageNumber.toString());
     return `${pathName}?${params.toString()}`;
