@@ -5,7 +5,7 @@ import { useQueryState } from 'nuqs';
 
 export default function Search({ placeholder }: { placeholder: string }) {
   const [query, setQuery] = useQueryState('query');
-  const [_, setPage] = useQueryState('page');
+  const [, setPage] = useQueryState('page');
 
   const handleSearch = useDebouncedCallback((term: string) => {
     setQuery(term, { shallow: false });

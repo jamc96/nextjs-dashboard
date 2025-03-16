@@ -12,7 +12,7 @@ export default function Pagination({ totalPages }: { totalPages: number }) {
   const pathName = usePathname();
   const searchParams = useSearchParams();
   // improvement: setting the pagingation state
-  const [page, _] = useQueryState('page', parseAsInteger.withDefault(1));
+  const [page,] = useQueryState('page', parseAsInteger.withDefault(1));
   const currentPage = page;
   const allPages = generatePagination(currentPage, totalPages);
 
